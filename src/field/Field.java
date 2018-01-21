@@ -34,8 +34,8 @@ import move.MoveType;
  */
 public class Field {
 
-    protected final String EMTPY_FIELD = ".";
-    protected final String BLOCKED_FIELD = "x";
+    private final String EMTPY_FIELD = ".";
+    private final String BLOCKED_FIELD = "x";
 
     private String myId;
     private String opponentId;
@@ -74,7 +74,7 @@ public class Field {
     /**
      * Clears the field
      */
-    public void clearField() {
+    private void clearField() {
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
                 this.field[x][y] = "";
@@ -258,5 +258,17 @@ public class Field {
 
     public ArrayList<Point> getTickingBombPositions() {
         return this.tickingBombPositions;
+    }
+
+    public String[][] getField(){
+        return this.field;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
