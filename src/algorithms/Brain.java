@@ -12,7 +12,6 @@ public class Brain {
     private BFS bfs;
     private BFS oponentBFS;
     private Pathfinder pathfinder;
-    private ArrayList<Point> bombHarazd;
     private Bombs bombManager;
     private Bugs bugsManager; //XD
 
@@ -33,7 +32,7 @@ public class Brain {
         oponentBFS.clear();
         oponentBFS.startBFS(state.getField().getOpponentPosition(), state);
 
-        bombHarazd = bombManager.markBombField(state);
+        ArrayList<Point> bombHarazd = bombManager.markBombField(state);
         for (Point p : bombHarazd)
             System.err.println(p);
         if (bombManager.inBombExpArea(state, bombHarazd)) {
