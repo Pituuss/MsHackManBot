@@ -14,7 +14,6 @@ public class Bombs {
 
     public boolean canPlantTheBomb(BotState state, ArrayList<Point> bombHazard, BFS bfs) {
         Point safe = saveField(state, bombHazard, bfs);
-        System.err.println("WTF safe"+safe);
         return !safe.equals(new Point(-1, -1)) && bfs.getDistance()[safe.x][safe.y] + 1 < 3;
     }
 
