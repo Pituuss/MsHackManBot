@@ -4,13 +4,16 @@ import bot.BotState;
 import move.MoveType;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 public class Pathfinder {
 
     public MoveType nextMove(BotState state, Point[][] parent, Point pos) {
+
         Point playerCurrentPosition = state.getField().getMyPosition();
 
+        if (pos.equals(new Point(-1, -1)))
+            return MoveType.PASS;
+        
         while (!parent[pos.x][pos.y].equals(playerCurrentPosition)) {
             pos = parent[pos.x][pos.y];
         }

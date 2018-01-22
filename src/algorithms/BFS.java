@@ -34,7 +34,7 @@ public class BFS {
         }
     }
 
-    private ArrayList<Point> getNeighbours(Point position, BotState state) {
+    public ArrayList<Point> getNeighbours(Point position, BotState state) {
         ArrayList<Point> adjacentPoints = new ArrayList<>();
 
         int posX = position.x;
@@ -49,39 +49,20 @@ public class BFS {
             adjacentPoints.add(new Point(width - 1, posY));
         if (state.getField().getField()[posX][posY].contains("Gr"))
             adjacentPoints.add(new Point(0, posY));
-        if (isPointValid(upper, state)) adjacentPoints.add(upper);
-        if (isPointValid(bottom, state)) adjacentPoints.add(bottom);
-        if (isPointValid(left, state)) adjacentPoints.add(left);
-        if (isPointValid(right, state)) adjacentPoints.add(right);
+        if (state.getField().isPointValid(upper)) adjacentPoints.add(upper);
+        if (state.getField().isPointValid(bottom)) adjacentPoints.add(bottom);
+        if (state.getField().isPointValid(left)) adjacentPoints.add(left);
+        if (state.getField().isPointValid(right)) adjacentPoints.add(right);
 
         return adjacentPoints;
     }
-
-    private boolean isPointValid(Point point, BotState state) {
-        int x = point.x;
-        int y = point.y;
-
-        return x >= 0 && x < this.width && y >= 0 && y < this.height &&
-                !state.getField().getField()[x][y].contains("x");
-    }
-
 
     public void startBFS(Point pos, BotState state) {
 
         distance[pos.x][pos.y] = 0.0;
         visited[pos.x][pos.y] = true;
 
-        for (Point bugPos : state.getField().getEnemyPositions()) {
-            visited[bugPos.x][bugPos.y] = true;
-            if (bugPos.x-1 >= 0)
-            visited[bugPos.x-1][bugPos.y] = true;
-            if (bugPos.x+1 < this.width)
-            visited[bugPos.x+1][bugPos.y] = true;
-            if (bugPos.y-1 >= 0)
-            visited[bugPos.x][bugPos.y-1] = true;
-            if (bugPos.y+1 < this.height)
-            visited[bugPos.x][bugPos.y+1] = true;
-        }
+        markBugs(visited, state);
 
         queue.push(pos);
         while (!queue.isEmpty()) {
@@ -97,11 +78,33 @@ public class BFS {
         }
     }
 
+    public void markBugs(Boolean[][] visited, BotState state) {
+        for (Point bugPos : state.getField().getEnemyPositions()) {
+            visited[bugPos.x][bugPos.y] = true;
+            if (bugPos.x - 1 >= 0)
+                visited[bugPos.x - 1][bugPos.y] = true;
+            if (bugPos.x + 1 < this.width)
+                visited[bugPos.x + 1][bugPos.y] = true;
+            if (bugPos.y - 1 >= 0)
+                visited[bugPos.x][bugPos.y - 1] = true;
+            if (bugPos.y + 1 < this.height)
+                visited[bugPos.x][bugPos.y + 1] = true;
+        }
+    }
+
     public Point[][] getParent() {
         return parent;
     }
 
     public Double[][] getDistance() {
         return distance;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }

@@ -73,12 +73,14 @@ public class BotStarter {
     private BFS bfs;
     private Pathfinder pathfinder;
     private Brain brain;
+    private BFS oponentBFS;
 
     private BotStarter() {
         this.random = new Random();
         this.bfs = new BFS(19, 15);
         this.pathfinder = new Pathfinder();
-        this.brain = new Brain(this.bfs, this.pathfinder);
+        this.oponentBFS = new BFS(19, 15);
+        this.brain = new Brain(this.bfs, this.oponentBFS, this.pathfinder);
     }
 
     /**
@@ -98,27 +100,19 @@ public class BotStarter {
      * @return A Move object
      */
     public Move doMove(BotState state) {
-        bfs.clear();
-        bfs.startBFS(state.getField().getMyPosition(), state);
-
         Player me = state.getPlayers().get(state.getMyName());
-        MoveType nextMove = brain.makeMoveDecison(state, me);
+        Move nextMove = brain.makeMoveDecision(state, me);
 
-        for (Double[] Row : bfs.getDistance())
-            System.err.println(Arrays.toString(Row));
-        System.err.println("\n\n");
+//        for (Double[] Row : bfs.getDistance())
+//            System.err.println(Arrays.toString(Row));
+//        System.err.println("\n\n");
+//
+//        for (String[] Row : state.getField().getField())
+//            System.err.println(Arrays.toString(Row));
+//        System.err.println("\n\n");
 
-        for (String[] Row : state.getField().getField())
-            System.err.println(Arrays.toString(Row));
-        System.err.println("\n\n");
 
-        if (me.getBombs() <= 0) {
-            return new Move(nextMove); // No bombs available
-        }
-
-//        int bombTicks = this.random.nextInt(4) + 2; // random number 2 - 5
-
-        return new Move(nextMove, 5); // Drop bomb if available
+        return nextMove;// Drop bomb if available
     }
 
     public static void main(String[] args) {
