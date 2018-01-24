@@ -44,6 +44,7 @@ public class BotStarter {
 
     public BotStarter() {
         this.makeDecision = new MakeDecision();
+        this.random = new Random();
     }
 
     public CharacterType getCharacter() {
