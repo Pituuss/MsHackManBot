@@ -7,6 +7,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+@SuppressWarnings("ALL")
 public class BFS {
     private Boolean[][] visited;
     private Point[][] parent;

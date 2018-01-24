@@ -33,6 +33,7 @@ import player.Player;
  *
  * @author Jim van Eeden - jim@riddles.io
  */
+@SuppressWarnings("ALL")
 public class BotParser {
 
     private Scanner scan;

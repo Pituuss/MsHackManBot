@@ -7,14 +7,17 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Bugs {
+@SuppressWarnings("ALL")
+public class BugManager {
     private int width, height;
-    private Boolean[][] visited = new Boolean[19][15];
-    private Double[][] distance = new Double[19][15];
+    private Boolean[][] visited;
+    private Double[][] distance;
 
-    public Bugs(int width, int height) {
+    public BugManager(int width, int height) {
         this.height = height;
         this.width = width;
+        this.visited = new Boolean[width][height];
+        this.distance = new Double[width][height];
     }
 
     public int nearbyBugsCount(BotState state) {

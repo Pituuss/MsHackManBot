@@ -7,7 +7,8 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class Bombs {
+@SuppressWarnings("ALL")
+public class BombManager {
     public boolean inBombExpArea(BotState state, ArrayList<Point> bombHazard) {
         return bombHazard.contains(state.getField().getMyPosition());
     }

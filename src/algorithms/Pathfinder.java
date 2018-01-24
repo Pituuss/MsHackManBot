@@ -5,9 +5,10 @@ import move.MoveType;
 
 import java.awt.*;
 
+@SuppressWarnings("ALL")
 public class Pathfinder {
 
-    public MoveType nextMove(BotState state, Point[][] parent, Point pos) {
+    public MoveType findPath(BotState state, Point[][] parent, Point pos) {
 
         Point playerCurrentPosition = state.getField().getMyPosition();
 
