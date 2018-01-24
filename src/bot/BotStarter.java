@@ -21,7 +21,7 @@ package bot;
 
 import java.util.Random;
 
-import algorithms.MakeDecision;
+import utilities.MakeDecision;
 import move.Move;
 import player.CharacterType;
 import player.Player;
